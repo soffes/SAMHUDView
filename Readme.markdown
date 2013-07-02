@@ -6,4 +6,4 @@ SAMHUDView is tested on iOS 6 and requires ARC. Released under the [MIT license]
 
 ## Installation
 
-Simply add the files in the `SAMHUDView` folder and  the `Resources` folder to your project.
+Simply add the files in the `SAMHUDView` folder and the `Resources` folder to your project or add `SAMHUDView` to your Podfile.
