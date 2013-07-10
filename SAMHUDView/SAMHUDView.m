@@ -293,6 +293,10 @@ static CGFloat kIndicatorSize = 40.0;
 
 
 - (void)dismissAnimated:(BOOL)animated {
+	if (!self.superview) {
+		return;
+	}
+
 	[UIView beginAnimations:@"SAMHUDViewFadeOutContentFrame" context:nil];
 	[UIView setAnimationDuration:0.2];
 	CGRect contentFrame = self.frame;
