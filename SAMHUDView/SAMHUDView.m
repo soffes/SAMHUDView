@@ -86,8 +86,7 @@ static CGFloat kIndicatorSize = 40.0;
 
 
 - (void)dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
-	[self removeWindow];
+    [self dismiss];
 }
 
 
@@ -174,9 +173,8 @@ static CGFloat kIndicatorSize = 40.0;
 		self.completeImage = [UIImage imageNamed:@"SAMHUDView-Check"];
 		self.failImage = [UIImage imageNamed:@"SAMHUDView-X"];
 
-        // Orientation
-        [self setTransformForCurrentOrientation:NO];
-        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(_deviceOrientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
+		// Orientation
+		[self setTransformForCurrentOrientation:NO];
 	}
 	return self;
 }
@@ -225,6 +223,8 @@ static CGFloat kIndicatorSize = 40.0;
 	[UIView setAnimationDuration:0.3];
 	self.frame = contentFrame;
 	[UIView commitAnimations];
+
+	[[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(deviceOrientationChanged:) name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 
@@ -379,6 +379,8 @@ static CGFloat kIndicatorSize = 40.0;
 	// Return focus to the main window
 	[self.keyWindow makeKeyWindow];
 	self.keyWindow = nil;
+
+	[[NSNotificationCenter defaultCenter] removeObserver:self name:UIDeviceOrientationDidChangeNotification object:nil];
 }
 
 @end
