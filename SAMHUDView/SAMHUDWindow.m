@@ -12,6 +12,8 @@ static SAMHUDWindow *kHUDWindow = nil;
 
 @implementation SAMHUDWindow
 
+@synthesize hidesVignette = _hidesVignette;
+
 #pragma mark - Accessors
 
 - (void)setHidesVignette:(BOOL)hide {

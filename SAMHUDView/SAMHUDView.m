@@ -14,7 +14,7 @@
 static CGFloat kIndicatorSize = 40.0;
 
 @interface SAMHUDView ()
-@property (nonatomic, strong) SAMHUDWindow *hudWindow;
+@property (nonatomic, readonly) SAMHUDWindow *hudWindow;
 @property (nonatomic, strong) UIWindow *keyWindow;
 
 - (void)setTransformForCurrentOrientation:(BOOL)animated;
@@ -26,8 +26,14 @@ static CGFloat kIndicatorSize = 40.0;
 
 #pragma mark - Accessors
 
-@synthesize activityIndicator = _activityIndicator;
 @synthesize textLabel = _textLabel;
+@synthesize activityIndicator = _activityIndicator;
+@synthesize hudSize = _hudSize;
+@synthesize loading = _loading;
+@synthesize successful = _successful;
+@synthesize completeImage = _completeImage;
+@synthesize failImage = _failImage;
+@synthesize keyWindow = _keyWindow;
 
 - (void)setLoading:(BOOL)isLoading {
 	_loading = isLoading;
@@ -71,10 +77,7 @@ static CGFloat kIndicatorSize = 40.0;
 
 
 - (SAMHUDWindow *)hudWindow {
-	if (!_hudWindow) {
-		_hudWindow = [SAMHUDWindow defaultWindow];
-	}
-	return _hudWindow;
+	return [SAMHUDWindow defaultWindow];
 }
 
 
@@ -374,7 +377,6 @@ static CGFloat kIndicatorSize = 40.0;
 
 - (void)removeWindow {
 	[self.hudWindow resignKeyWindow];
-	self.hudWindow = nil;
 
 	// Return focus to the main window
 	[self.keyWindow makeKeyWindow];
