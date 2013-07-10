@@ -376,6 +376,7 @@ static CGFloat kIndicatorSize = 40.0;
 
 
 - (void)removeWindow {
+	[self removeFromSuperview];
 	[self.hudWindow resignKeyWindow];
 
 	// Return focus to the main window
