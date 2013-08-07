@@ -334,30 +334,30 @@ static CGFloat kIndicatorSize = 40.0;
 #pragma mark - Private
 
 - (void)setTransformForCurrentOrientation:(BOOL)animated {
-	NSInteger degrees = 0;
+	CGFloat rotation = 0.0f;
 	switch ([UIApplication sharedApplication].statusBarOrientation) {
 		case UIInterfaceOrientationPortrait: {
-			degrees = 0;
+			// Zero
 			break;
 		}
 
 		case UIInterfaceOrientationLandscapeLeft: {
-			degrees = -M_PI_2;
+			rotation = -M_PI_2;
 			break;
 		}
 
 		case UIInterfaceOrientationLandscapeRight: {
-			degrees = M_PI_2;
+			rotation = M_PI_2;
 			break;
 		}
 
 		case UIInterfaceOrientationPortraitUpsideDown: {
-			degrees = M_PI;
+			rotation = M_PI;
 			break;
 		}
 	}
 
-    CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(degrees);
+    CGAffineTransform rotationTransform = CGAffineTransformMakeRotation(rotation);
 
 	if (animated) {
 		[UIView beginAnimations:@"SAMHUDViewRotationTransform" context:nil];
