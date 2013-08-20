@@ -54,8 +54,8 @@ static SAMHUDWindow *kHUDWindow = nil;
 	CGContextRef context = UIGraphicsGetCurrentContext();
 	NSArray *colors = @[(id)[UIColor colorWithWhite:0.0f alpha:0.1f].CGColor, (id)[UIColor colorWithWhite:0.0f alpha:0.5f].CGColor];
 	CGGradientRef gradient = CGGradientCreateWithColors(CGColorGetColorSpace((__bridge CGColorRef)colors[0]), (__bridge CFArrayRef)colors, NULL);
-    CGPoint centerPoint  = CGPointMake(self.bounds.size.width / 2.0 , self.bounds.size.height / 2.0);
-    CGContextDrawRadialGradient(context, gradient, centerPoint, 0.0f, centerPoint, fmaxf(self.bounds.size.width, self.bounds.size.height) / 2.0f, kCGGradientDrawsAfterEndLocation);
+	CGPoint centerPoint  = CGPointMake(self.bounds.size.width / 2.0f, self.bounds.size.height / 2.0f);
+	CGContextDrawRadialGradient(context, gradient, centerPoint, 0.0f, centerPoint, fmaxf(self.bounds.size.width, self.bounds.size.height) / 2.0f, kCGGradientDrawsAfterEndLocation);
 	CGGradientRelease(gradient);
 }
 
