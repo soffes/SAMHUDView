@@ -125,11 +125,26 @@ static CGFloat kIndicatorSize = 40.0f;
 		
 		NSString *dingbat = self.successful ? @"✔" : @"✘";
 		UIFont *dingbatFont = [UIFont systemFontOfSize:60.0f];
+		
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+		CGSize dingbatSize = [dingbat sizeWithAttributes:@{NSFontAttributeName : dingbatFont}];
+#else
 		CGSize dingbatSize = [dingbat sizeWithFont:dingbatFont];
+#endif
+		
 		CGRect dingbatRect = CGRectMake(roundf((self.hudSize.width - dingbatSize.width) / 2.0f),
 										roundf((self.hudSize.height - dingbatSize.height) / 2.0f),
 										dingbatSize.width, dingbatSize.height);
+		
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+		NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+		[style setAlignment:NSTextAlignmentCenter];
+		[style setLineBreakMode:NSLineBreakByClipping];
+		
+		[dingbat drawInRect:dingbatRect withAttributes:@{NSFontAttributeName : dingbatFont, NSParagraphStyleAttributeName : style}];
+#else
 		[dingbat drawInRect:dingbatRect withFont:dingbatFont lineBreakMode:NSLineBreakByClipping alignment:NSTextAlignmentCenter];
+#endif
 	}
 }
 
@@ -142,7 +157,17 @@ static CGFloat kIndicatorSize = 40.0f;
 	if (self.textLabel.hidden) {
 		self.textLabel.frame = CGRectZero;
 	} else {
+#if __IPHONE_OS_VERSION_MIN_REQUIRED >= 70000
+		NSMutableParagraphStyle *style = [[NSMutableParagraphStyle alloc] init];
+		[style setLineBreakMode:self.textLabel.lineBreakMode];
+		
+		CGSize textSize = [self.textLabel.text boundingRectWithSize:CGSizeMake(self.bounds.size.width, CGFLOAT_MAX)
+															options:NSStringDrawingUsesLineFragmentOrigin
+														 attributes:@{NSFontAttributeName : self.textLabel.font, NSParagraphStyleAttributeName : style}
+															context:nil].size;
+#else
 		CGSize textSize = [self.textLabel.text sizeWithFont:self.textLabel.font constrainedToSize:CGSizeMake(self.bounds.size.width, CGFLOAT_MAX) lineBreakMode:self.textLabel.lineBreakMode];
+#endif
 		self.textLabel.frame = CGRectMake(0.0f, roundf(self.hudSize.height - textSize.height - 10.0f), self.hudSize.width, textSize.height);
 	}
 }
