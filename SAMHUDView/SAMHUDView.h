@@ -17,9 +17,13 @@
 @property (nonatomic, strong) UIImage *completeImage;
 @property (nonatomic, strong) UIImage *failImage;
 
++ (id)sharedHUD;
+
 - (id)initWithTitle:(NSString *)aTitle;
 - (id)initWithTitle:(NSString *)aTitle loading:(BOOL)isLoading;
 
+- (void)showWithTitle:(NSString *)aTitle;
+- (void)showWithTitle:(NSString *)aTitle loading:(BOOL)isLoading;
 - (void)show;
 - (void)dismiss;
 - (void)dismissAnimated:(BOOL)animated;

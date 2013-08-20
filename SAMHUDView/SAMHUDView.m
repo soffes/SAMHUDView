@@ -84,8 +84,15 @@ static CGFloat kIndicatorSize = 40.0f;
 
 #pragma mark - NSObject
 
-- (id)init {
-	return (self = [self initWithTitle:nil loading:YES]);
++ (id)sharedHUD {
+	static id sharedInstance = nil;
+	static dispatch_once_t onceToken;
+	
+	dispatch_once(&onceToken, ^{
+		sharedInstance = [[self alloc] initWithTitle:nil loading:YES];
+	});
+	
+	return sharedInstance;
 }
 
 - (void)dealloc {
@@ -94,11 +101,6 @@ static CGFloat kIndicatorSize = 40.0f;
 
 
 #pragma mark - UIView
-
-- (id)initWithFrame:(CGRect)frame {
-	return (self = [self initWithTitle:nil loading:YES]);
-}
-
 
 - (void)drawRect:(CGRect)rect {
 	CGContextRef context = UIGraphicsGetCurrentContext();
@@ -205,6 +207,18 @@ static CGFloat kIndicatorSize = 40.0f;
 		[self setTransformForCurrentOrientation:NO];
 	}
 	return self;
+}
+
+
+- (void)showWithTitle:(NSString *)aTitle {
+	[self showWithTitle:aTitle loading:YES];
+}
+
+
+- (void)showWithTitle:(NSString *)aTitle loading:(BOOL)isLoading {
+	self.textLabel.text = aTitle ? aTitle : NSLocalizedString(@"Loading…", nil);
+	self.loading = isLoading;
+	[self show];
 }
 
 
