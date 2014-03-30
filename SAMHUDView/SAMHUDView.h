@@ -3,7 +3,7 @@
 //  SAMHUDView
 //
 //  Created by Sam Soffes on 9/29/09.
-//  Copyright 2009-2013 Sam Soffes. All rights reserved.
+//  Copyright 2009-2014 Sam Soffes. All rights reserved.
 //
 
 @interface SAMHUDView : UIView

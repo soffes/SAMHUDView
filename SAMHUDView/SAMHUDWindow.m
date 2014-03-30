@@ -3,10 +3,11 @@
 //  SAMHUDView
 //
 //  Created by Sam Soffes on 3/17/11.
-//  Copyright 2011-2013 Sam Soffes. All rights reserved.
+//  Copyright 2011-2014 Sam Soffes. All rights reserved.
 //
 
 #import "SAMHUDWindow.h"
+#import "SAMHUDWindowViewController.h"
 
 static SAMHUDWindow *kHUDWindow = nil;
 
@@ -39,6 +40,7 @@ static SAMHUDWindow *kHUDWindow = nil;
 	if ((self = [super initWithFrame:[[UIScreen mainScreen] bounds]])) {
 		self.backgroundColor = [UIColor clearColor];
 		self.windowLevel = UIWindowLevelStatusBar + 1.0f;
+		self.rootViewController = [[SAMHUDWindowViewController alloc] init];
 	}
 	return self;
 }
