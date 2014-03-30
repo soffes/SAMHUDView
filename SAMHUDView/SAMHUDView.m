@@ -73,6 +73,7 @@ static CGFloat kIndicatorSize = 40.0;
 		_textLabel.shadowOffset = CGSizeMake(0.0f, 1.0f);
 		_textLabel.textAlignment = NSTextAlignmentCenter;
 		_textLabel.lineBreakMode = NSLineBreakByTruncatingTail;
+		_textLabel.adjustsFontSizeToFitWidth = YES;
 	}
 	return _textLabel;
 }
@@ -129,12 +130,15 @@ static CGFloat kIndicatorSize = 40.0;
 		}
 
 		NSString *dingbat = self.successful ? @"✔" : @"✘";
-		UIFont *dingbatFont = [UIFont systemFontOfSize:60.0f];
-		CGSize dingbatSize = [dingbat sizeWithFont:dingbatFont];
+		NSDictionary *attributes = @{
+			NSFontAttributeName: [UIFont systemFontOfSize:60.0f],
+			NSForegroundColorAttributeName: [UIColor whiteColor]
+		};
+		CGSize dingbatSize = [dingbat sizeWithAttributes:attributes];
 		CGRect dingbatRect = CGRectMake(roundf((self.hudSize.width - dingbatSize.width) / 2.0f),
 										roundf((self.hudSize.height - dingbatSize.height) / 2.0f),
 										dingbatSize.width, dingbatSize.height);
-		[dingbat drawInRect:dingbatRect withFont:dingbatFont lineBreakMode:NSLineBreakByClipping alignment:NSTextAlignmentCenter];
+		[dingbat drawInRect:dingbatRect withAttributes:attributes];
 	}
 }
 
@@ -147,7 +151,7 @@ static CGFloat kIndicatorSize = 40.0;
 	if (self.textLabel.hidden) {
 		self.textLabel.frame = CGRectZero;
 	} else {
-		CGSize textSize = [self.textLabel.text sizeWithFont:self.textLabel.font constrainedToSize:CGSizeMake(self.bounds.size.width, CGFLOAT_MAX) lineBreakMode:self.textLabel.lineBreakMode];
+		CGSize textSize = [self.textLabel sizeThatFits:self.bounds.size];
 		self.textLabel.frame = CGRectMake(0.0f, roundf(self.hudSize.height - textSize.height - 10.0f), self.hudSize.width, textSize.height);
 	}
 }
