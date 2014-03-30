@@ -1,0 +1,14 @@
+PODS:
+  - SAMHUDView (0.1.1)
+
+DEPENDENCIES:
+  - SAMHUDView (from `../`)
+
+EXTERNAL SOURCES:
+  SAMHUDView:
+    :path: ../
+
+SPEC CHECKSUMS:
+  SAMHUDView: e3d20400487490a605e51a18699d212cfdce97a3
+
+COCOAPODS: 0.29.0
