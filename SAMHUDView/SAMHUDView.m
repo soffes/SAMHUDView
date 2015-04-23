@@ -354,12 +354,12 @@ static CGFloat kIndicatorSize = 40.0;
 		}
 
 		case UIInterfaceOrientationLandscapeLeft: {
-			rotation = -M_PI_2;
+			rotation = 0;
 			break;
 		}
 
 		case UIInterfaceOrientationLandscapeRight: {
-			rotation = M_PI_2;
+			rotation = 0;
 			break;
 		}
 
